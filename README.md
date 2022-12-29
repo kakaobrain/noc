@@ -1,7 +1,7 @@
 [![KakaoBrain](https://img.shields.io/badge/kakao-brain-ffcd00.svg)](http://kakaobrain.com/)
 
 # Noise-aware Learning from Web-crawled Image-Text Data for Image Captioning
-This is an official PyTorch Implementation of **Noise-aware Learning from Web-crawled Image-Text Data for Image Captioning** [[arxiv]](https://arxiv.org/abs/)
+This is an official PyTorch Implementation of **Noise-aware Learning from Web-crawled Image-Text Data for Image Captioning** [[arxiv]](https://arxiv.org/abs/2212.13563)
   - The method is a novel image captioning framework mainly for web-crawled image-text data.
   To be specific, the method addresses the noise issue in the web-crawled data by learning a quality controllable captioning model.
   The model is learned using alignment levels of the image-text pairs as an additional control signal during training.
