@@ -18,7 +18,7 @@ If you find this code helpful for your research, please cite our paper.
 @article{kang2022noise,
   title={Noise-aware Learning from Web-crawled Image-Text Data for Image Captioning},
   author={Kang, Woo Young and Mun, Jonghwan and Lee, SungJun and Roh, Byungseok},
-  journal={arXiv preprint arXiv:},
+  journal={arXiv preprint arXiv:2212.13563},
   year={2022}
 }
 ```
