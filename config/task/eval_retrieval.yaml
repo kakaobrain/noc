@@ -1,0 +1,38 @@
+# @package _global_
+experiment:
+    seed: 2022
+    dry_run: False
+    expr_name: devel
+    effective_batch_size_test: 64
+    load_from: "" # "path to {model_name}.ckpt"
+    strategy:
+        type: ddp # [ddp, zero1, zero2, zero3]
+        offload_optimizer: False
+        offload_parameters: False
+    fp16_grad_comp: False
+
+trainer:
+    accelerator: gpu
+    precision: 32
+    detect_anomaly: False
+
+dataset:
+    name_val: "retrieval"
+    pred_file_path: ""  # should be given
+    loc: bcloud
+    num_workers: 8
+    pin_memory: True
+    transform_hparams:
+        resolution: 256
+        clip_resolution: 224  # cropped size from random crop
+    clip_text_max_len: 77
+
+model:
+    name: "retrieval"
+    use_sync_bn: True  # for sync_batchnorm in pyl
+    clip:
+        model_file: ViT-L/14
+
+distributed:
+    num_nodes: 1
+    num_proc_per_node: 1

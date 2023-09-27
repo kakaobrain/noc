@@ -1,0 +1,38 @@
+# @package _global_
+experiment:
+    seed: 2022
+    dry_run: False
+    mode: val
+    expr_name: devel
+    effective_batch_size_test: 64
+    load_from: ""  # "path to {model_name}.ckpt"
+    strategy:
+        type: ddp # [ddp, zero1, zero2, zero3]
+        offload_optimizer: False
+        offload_parameters: False
+    fp16_grad_comp: False
+
+trainer:
+    accelerator: gpu
+    precision: 32
+
+dataset:
+    name_val: "flickr30k"
+    ds_type: mapstyle
+    image_dir: "data/flickr30k/images/"
+    ann_file_path: "data/flickr30k/ann_test.json"
+    num_workers: 8
+    pin_memory: True
+    transform_hparams:
+        resolution: 256
+        clip_resolution: 224  # cropped size from random crop
+    clip_text_max_len: 77
+    cc_text_max_len: 25
+
+test:
+    val_freq: 1
+    only_calc_score_from_files: False # Whether calculating NLP scores with generations or not. If Ture then calc the scores from dumped prediction files.
+
+distributed:
+    num_nodes: 1
+    num_proc_per_node: 1

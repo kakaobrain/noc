@@ -1,0 +1,97 @@
+# @package _global_
+experiment:
+    seed: 2022
+    dry_run: False
+    mode: train
+    expr_name: devel
+    effective_batch_size_train: 2048
+    effective_batch_size_test: 128
+    collate_fn: default_collator
+    load_from: "" # "path to {model_name}.ckpt"
+    resume: False # Resume a training process from ~/results/expr_name/last.ckpt
+    max_epochs: null
+    max_steps: 13960 # 1396 iterations per one epoch with 2048 total bsz in cc3m
+    val_check_interval: 1.0
+    ckpt_freq: 0  # Number of epochs between checkpoints. if 0 then only save last and top_k models.
+    save_top_k: 1 # The best k models according to the quantity monitored will be saved.
+    strategy:
+        type: ddp # [ddp, zero1, zero2, zero3]
+        offload_optimizer: False
+        offload_parameters: False
+    fp16_grad_comp: False
+
+trainer:
+    accelerator: gpu
+    precision: 16
+    max_epochs: -1
+    detect_anomaly: False
+    num_sanity_val_steps: 0
+
+dataset:
+    name_train: "cc3m"
+    name_val: "cc3m"
+    ds_type: mapstyle
+    image_dir: "data/cc3m/images/"
+    filtering_th: 0.0
+    num_workers: 8
+    pin_memory: True
+    transform_hparams:
+        resolution: 256  # random crop size
+        clip_resolution: 224  # cropped size from random crop
+    clip_text_max_len: 77
+    cc_text_max_len: 25
+
+test:
+    val_freq: 1
+    only_calc_score_from_files: False  # Whether calculating NLP scores with generations or not. If Ture then calc the scores from dumped prediction files.
+
+model:
+    name: "captioner"
+    type: "controllable"  # [controllable, vanilla]
+    use_sync_bn: True  # for sync_batchnorm in pyl
+    control_signal_at_inference: 0
+    prefix_length: 17
+    bucket_path: "data/bucket/bucket_8bins.pickle"
+    encoder:
+        model_file: ViT-L/14
+        freeze_clip_param: False
+        dense_feat: True
+        avg_pool_scale: 4
+    clip:
+        model_file: ViT-L/14
+    clip_sim_onthefly: True
+    transformer:
+        num_layers: 6
+        textual_feature_size: 768
+        feedforward_size: 3072
+        attention_heads: 12
+        hidden_size: 768
+        vocab_size: 50257
+        stop_token: <|endoftext|>
+        padding_idx: 0
+        dropout: 0.1
+        norm_first: False
+        mask_future_positions: True
+
+optimizer:
+    name: adamW
+    regularize_bn: False
+    regularize_bias: False
+    gradient_clip_val: 1.0
+    gradient_clip_algorithm: "norm"
+    scheduler:
+        name: cosine_with_linear_warmup
+        warmup: 0.1  # ratio
+    optim_cfg_enc:
+        base_lr: 0.00001
+        weight_decay: 0.00001
+    optim_cfg_dec:
+        base_lr: 0.0001
+        weight_decay: 0.00001
+
+distributed:
+    num_nodes: 16
+    num_proc_per_node: 4
+
+logging:
+    log_freq: 20
