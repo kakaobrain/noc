@@ -137,9 +137,9 @@ To predict captions from these checkpoints, decompress the .tar files and locate
 
 | Method              | Checkpoint (pre-trained) |
 |:--------------------|:------------------------:|
-| Vanilla             | [download]()             |
-| Vanilla (Filtering) | [download]()             |
-| NoC (ours)          | [download]()             |
+| Vanilla             | [download](https://arena.kakaocdn.net/brainrepo/models/noc/006229c7f6c6210e53aab9fb133e0d4e/vanilla_baseline.tar.gz)             |
+| Vanilla (Filtering) | [download](https://arena.kakaocdn.net/brainrepo/models/noc/87f6a0e3cd8ac2d1ba7ba33dca45fd5d/filtering_baseline.tar.gz)             |
+| NoC (ours)          | [download](https://arena.kakaocdn.net/brainrepo/models/noc/854d08dcbe219b0c2b2a3cf90d4c646a/noc.tar.gz)             |
 
 
 
