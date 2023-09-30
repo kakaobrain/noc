@@ -146,11 +146,13 @@ To predict captions from these checkpoints, decompress the .tar files and locate
 ## 6. Citation
 If you find this code helpful for your research, please cite our paper.
 ```
-@article{kang2022noise,
-  title={Noise-aware Learning from Web-crawled Image-Text Data for Image Captioning},
-  author={Kang, Woo Young and Mun, Jonghwan and Lee, SungJun and Roh, Byungseok},
-  journal={arXiv preprint arXiv:2212.13563},
-  year={2022}
+@InProceedings{Kang_2023_ICCV,
+    author    = {Kang, Wooyoung and Mun, Jonghwan and Lee, Sungjun and Roh, Byungseok},
+    title     = {Noise-Aware Learning from Web-Crawled Image-Text Data for Image Captioning},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2023},
+    pages     = {2942-2952}
 }
 ```
 
