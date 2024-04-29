@@ -25,7 +25,6 @@ from noc.models.clip.simple_tokenizer import get_clip_tokenizer
 from noc.models.decoder.crossDecoder import CrossDecoder
 from noc.models.decoder.tokenizer import load_gpt_tokenizer
 from noc.utils import distribute as custom_dist
-from noc.utils import main_utils
 from nocap_evaluation.evalai import NocapsEvaluator
 
 
@@ -180,6 +179,7 @@ class Captioner(pl.LightningModule):
     def on_train_start(self) -> None:
         if self.global_rank == 0:
             try:
+                from noc.utils import main_utils  # add this
                 main_utils.save_config_to_disk(self.cfg)
             except FileNotFoundError as err:
                 logging.info(err)
