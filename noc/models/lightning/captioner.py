@@ -179,7 +179,7 @@ class Captioner(pl.LightningModule):
     def on_train_start(self) -> None:
         if self.global_rank == 0:
             try:
-                from noc.utils import main_utils  # add this
+                from noc.utils import main_utils
                 main_utils.save_config_to_disk(self.cfg)
             except FileNotFoundError as err:
                 logging.info(err)
